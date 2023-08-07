@@ -1,0 +1,9 @@
+.header {
+  text-align: center;
+  padding: var(--spacing-small);
+  background-color: var(--secondary-color);
+
+  &__heading {
+    font-size: var(--font-large);
+  }
+}
