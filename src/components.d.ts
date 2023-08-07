@@ -5,57 +5,131 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { ButtonTheme, ButtonType } from "./constants/form";
+import { Currency, Separator } from "./constants/currency";
+export { ButtonTheme, ButtonType } from "./constants/form";
+export { Currency, Separator } from "./constants/currency";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface RaboButton {
+        "fullWidth"?: boolean;
+        "label": string;
+        "theme"?: ButtonTheme;
+        "type"?: ButtonType;
+    }
+    interface RaboCard {
+        "heading"?: string;
+    }
+    interface RaboForm {
+    }
+    interface RaboHeader {
+    }
+    interface RaboLayout {
+    }
+    interface RaboMoneyInput {
+        "currency": Currency;
+        "disabled"?: boolean;
+        "label"?: string;
+        "name": string;
+        "required"?: boolean;
+        "separator": Separator;
+        "value": number;
     }
 }
+export interface RaboMoneyInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRaboMoneyInputElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLRaboButtonElement extends Components.RaboButton, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLRaboButtonElement: {
+        prototype: HTMLRaboButtonElement;
+        new (): HTMLRaboButtonElement;
+    };
+    interface HTMLRaboCardElement extends Components.RaboCard, HTMLStencilElement {
+    }
+    var HTMLRaboCardElement: {
+        prototype: HTMLRaboCardElement;
+        new (): HTMLRaboCardElement;
+    };
+    interface HTMLRaboFormElement extends Components.RaboForm, HTMLStencilElement {
+    }
+    var HTMLRaboFormElement: {
+        prototype: HTMLRaboFormElement;
+        new (): HTMLRaboFormElement;
+    };
+    interface HTMLRaboHeaderElement extends Components.RaboHeader, HTMLStencilElement {
+    }
+    var HTMLRaboHeaderElement: {
+        prototype: HTMLRaboHeaderElement;
+        new (): HTMLRaboHeaderElement;
+    };
+    interface HTMLRaboLayoutElement extends Components.RaboLayout, HTMLStencilElement {
+    }
+    var HTMLRaboLayoutElement: {
+        prototype: HTMLRaboLayoutElement;
+        new (): HTMLRaboLayoutElement;
+    };
+    interface HTMLRaboMoneyInputElement extends Components.RaboMoneyInput, HTMLStencilElement {
+    }
+    var HTMLRaboMoneyInputElement: {
+        prototype: HTMLRaboMoneyInputElement;
+        new (): HTMLRaboMoneyInputElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "rabo-button": HTMLRaboButtonElement;
+        "rabo-card": HTMLRaboCardElement;
+        "rabo-form": HTMLRaboFormElement;
+        "rabo-header": HTMLRaboHeaderElement;
+        "rabo-layout": HTMLRaboLayoutElement;
+        "rabo-money-input": HTMLRaboMoneyInputElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface RaboButton {
+        "fullWidth"?: boolean;
+        "label"?: string;
+        "theme"?: ButtonTheme;
+        "type"?: ButtonType;
+    }
+    interface RaboCard {
+        "heading"?: string;
+    }
+    interface RaboForm {
+    }
+    interface RaboHeader {
+    }
+    interface RaboLayout {
+    }
+    interface RaboMoneyInput {
+        "currency"?: Currency;
+        "disabled"?: boolean;
+        "label"?: string;
+        "name": string;
+        "onValueChange"?: (event: RaboMoneyInputCustomEvent<number>) => void;
+        "required"?: boolean;
+        "separator"?: Separator;
+        "value": number;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "rabo-button": RaboButton;
+        "rabo-card": RaboCard;
+        "rabo-form": RaboForm;
+        "rabo-header": RaboHeader;
+        "rabo-layout": RaboLayout;
+        "rabo-money-input": RaboMoneyInput;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "rabo-button": LocalJSX.RaboButton & JSXBase.HTMLAttributes<HTMLRaboButtonElement>;
+            "rabo-card": LocalJSX.RaboCard & JSXBase.HTMLAttributes<HTMLRaboCardElement>;
+            "rabo-form": LocalJSX.RaboForm & JSXBase.HTMLAttributes<HTMLRaboFormElement>;
+            "rabo-header": LocalJSX.RaboHeader & JSXBase.HTMLAttributes<HTMLRaboHeaderElement>;
+            "rabo-layout": LocalJSX.RaboLayout & JSXBase.HTMLAttributes<HTMLRaboLayoutElement>;
+            "rabo-money-input": LocalJSX.RaboMoneyInput & JSXBase.HTMLAttributes<HTMLRaboMoneyInputElement>;
         }
     }
 }
