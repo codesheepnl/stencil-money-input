@@ -3,12 +3,18 @@
   flex-direction: column;
   gap: var(--spacing-smaller);
 
-  &--state-disabled {
-    border: green;
-  }
-
   .label {
     font-size: var(--font-medium);
+  }
+
+  .error {
+    color: var(--danger);
+    font-size: var(--font-small);
+  }
+
+  .hint {
+    color: #444;
+    font-size: var(--font-small);
   }
 
   .input {
@@ -27,6 +33,10 @@
       &__currency {
         color: var(--primary-color);
       }
+    }
+
+    &--is-invalid {
+      border-color: red;
     }
 
     &__currency {

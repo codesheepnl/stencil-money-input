@@ -2,8 +2,11 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "extends": [
-    "plugin:@stencil-community/recommended",
-    "prettier"
-  ]
+  "extends": ["plugin:@stencil-community/recommended", "prettier"],
+  "rules": {
+    "@stencil-community/required-jsdoc": "off",
+    "@stencil-community/strict-boolean-conditions": "off",
+    "@stencil-community/ban-exported-const-enums": "off",
+    "react/jsx-no-bind": "off"
+  }
 }

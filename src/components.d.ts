@@ -5,12 +5,13 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ButtonTheme, ButtonType } from "./constants/form";
+import { ButtonTheme, ButtonType, FormSchema } from "./constants/form";
 import { Currency, Separator } from "./constants/currency";
-export { ButtonTheme, ButtonType } from "./constants/form";
+export { ButtonTheme, ButtonType, FormSchema } from "./constants/form";
 export { Currency, Separator } from "./constants/currency";
 export namespace Components {
     interface RaboButton {
+        "disabled"?: boolean;
         "fullWidth"?: boolean;
         "label": string;
         "theme"?: ButtonTheme;
@@ -20,20 +21,28 @@ export namespace Components {
         "heading"?: string;
     }
     interface RaboForm {
+        "schema": FormSchema;
+        "value": Record<string, any>;
     }
     interface RaboHeader {
     }
     interface RaboLayout {
     }
     interface RaboMoneyInput {
-        "currency": Currency;
+        "currency"?: Currency;
         "disabled"?: boolean;
+        "error"?: string;
+        "hint"?: string;
         "label"?: string;
         "name": string;
         "required"?: boolean;
-        "separator": Separator;
+        "separator"?: Separator;
         "value": number;
     }
+}
+export interface RaboFormCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRaboFormElement;
 }
 export interface RaboMoneyInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -87,6 +96,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface RaboButton {
+        "disabled"?: boolean;
         "fullWidth"?: boolean;
         "label"?: string;
         "theme"?: ButtonTheme;
@@ -96,6 +106,9 @@ declare namespace LocalJSX {
         "heading"?: string;
     }
     interface RaboForm {
+        "onFormSubmit"?: (event: RaboFormCustomEvent<typeof this.value>) => void;
+        "schema"?: FormSchema;
+        "value"?: Record<string, any>;
     }
     interface RaboHeader {
     }
@@ -104,6 +117,8 @@ declare namespace LocalJSX {
     interface RaboMoneyInput {
         "currency"?: Currency;
         "disabled"?: boolean;
+        "error"?: string;
+        "hint"?: string;
         "label"?: string;
         "name": string;
         "onValueChange"?: (event: RaboMoneyInputCustomEvent<number>) => void;
