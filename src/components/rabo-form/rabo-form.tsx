@@ -1,14 +1,7 @@
-import { Component, Listen, State, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, State, h } from '@stencil/core';
 import { RaboMoneyInputCustomEvent } from '@src/components';
-import { ButtonType } from '@constants/form';
+import { ButtonType, FormErrors, FormSchema, InputTypes } from '@constants/form';
 import { Currency, Separator } from '@constants/currency';
-
-/**
- * Hypothetical form value which could have more properties
- */
-type FormValue = {
-  amount: number;
-};
 
 @Component({
   tag: 'rabo-form',
@@ -16,34 +9,69 @@ type FormValue = {
   shadow: true,
 })
 export class RaboForm {
-  @State() value: FormValue = {
-    amount: undefined,
-  };
+  @Prop() schema: FormSchema;
+  @Prop({ mutable: true }) value: Record<string, any>;
 
-  @Listen('valueChange')
-  handleChange({ detail }: RaboMoneyInputCustomEvent<number>): void {
+  @Event() formSubmit: EventEmitter<typeof this.value>;
+
+  @State() errors: FormErrors<typeof this.value> | null;
+
+  private handleChange({ detail }: RaboMoneyInputCustomEvent<number>, field: string): void {
     this.value = {
       ...this.value,
-      amount: detail,
+      [field]: detail,
     };
   }
 
-  handleSubmit(event: globalThis.Event): void {
+  /**
+   * Handles submit of the form. Will check and assign for any errors.
+   * If valid, emits the submit event.
+   *
+   * @param event: globalThis.Event
+   * @returns void
+   */
+  private handleSubmit(event: globalThis.Event): void {
     event.preventDefault();
-    console.log(this.value);
+
+    this.errors = null;
+
+    for (const field of this.schema) {
+      for (const validator of field.validators) {
+        if (!validator.fn(this.value[field.name])) {
+          this.errors = {
+            [field.name]: validator.message,
+          };
+
+          return;
+        }
+      }
+    }
+
+    this.formSubmit.emit(this.value);
   }
 
   render() {
     return (
       <form onSubmit={(event) => this.handleSubmit(event)} class="form">
-        <rabo-money-input
-          name="amount"
-          value={this.value.amount}
-          currency={Currency.EUR}
-          separator={Separator.COMMA}
-          required
-          disabled
-        />
+        {this.schema.map((field) => {
+          if (field.type === InputTypes.MONEY) {
+            return (
+              <rabo-money-input
+                name={field.name}
+                value={this.value[field.name]}
+                currency={Currency.EUR}
+                separator={Separator.COMMA}
+                error={this.errors?.[field.name]}
+                onValueChange={(event) => this.handleChange(event, field.name)}
+                hint={field.hint}
+                required
+              />
+            );
+          }
+
+          // More types of inputs here in the future
+        })}
+
         <rabo-button label="Submit" type={ButtonType.SUBMIT} fullWidth />
       </form>
     );

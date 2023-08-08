@@ -13,7 +13,7 @@ export class RaboCard {
       <div class="card">
         {this.heading && (
           <div class="card__heading">
-            <h2>{this.heading}</h2>
+            <h3>{this.heading}</h3>
           </div>
         )}
         <slot name="content" />

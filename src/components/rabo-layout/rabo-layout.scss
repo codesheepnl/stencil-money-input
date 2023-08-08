@@ -1,6 +1,18 @@
 .content {
   display: flex;
+  gap: var(--spacing-large);
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: var(--spacing-large);
+
+  &__header {
+    text-align: center;
+  }
+
+  &__cards {
+    display: flex;
+    gap: var(--spacing-large);
+    flex-flow: row wrap;
+  }
 }
