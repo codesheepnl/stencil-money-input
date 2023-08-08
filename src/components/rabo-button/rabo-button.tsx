@@ -12,10 +12,17 @@ export class RaboButton {
   @Prop() type?: ButtonType = ButtonType.BUTTON;
   @Prop() theme?: ButtonTheme = ButtonTheme.PRIMARY;
   @Prop() fullWidth?: boolean = false;
+  @Prop() disabled?: boolean = false;
 
   render() {
     return (
-      <button class={`button button--${this.theme} ${this.fullWidth && 'button--full'}`} type={this.type}>
+      <button
+        class={`button button--${this.theme} ${this.fullWidth && 'button--full'} ${
+          this.disabled && 'button--is-disabled'
+        }`}
+        disabled={this.disabled}
+        type={this.type}
+      >
         {this.label}
       </button>
     );

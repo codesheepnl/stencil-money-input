@@ -4,27 +4,30 @@
   color: #fff;
   font-weight: bold;
   text-align: center;
+  border: 1px solid;
   border-radius: var(--radius-small);
   transition:
     250ms background-color ease,
     250ms color ease;
   cursor: pointer;
 
-  &--primary {
+  &--primary:not(&--is-disabled) {
     background-color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+    border-color: var(--primary-color);
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: transparent;
       color: var(--primary-color);
     }
   }
 
-  &--secondary {
+  &--secondary:not(&--is-disabled) {
     background-color: var(--secondary-color);
-    border: 1px solid var(--secondary-color);
+    border-color: var(--secondary-color);
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: transparent;
       color: var(--secondary-color);
     }
@@ -32,5 +35,11 @@
 
   &--full {
     width: 100%;
+  }
+
+  &--is-disabled {
+    background-color: var(--gray);
+    color: #000;
+    cursor: not-allowed;
   }
 }
