@@ -30,7 +30,7 @@
     &:focus-within {
       border-color: var(--primary-color);
 
-      &__currency {
+      & > span {
         color: var(--primary-color);
       }
     }
@@ -39,9 +39,16 @@
       border-color: red;
     }
 
+    &--is-disabled {
+      border-color: var(--gray);
+
+      & > span {
+        color: var(--gray);
+      }
+    }
+
     &__currency {
       font-weight: bold;
-      color: var(--gray);
       margin-right: var(--spacing-small);
       font-size: var(--font-medium);
     }

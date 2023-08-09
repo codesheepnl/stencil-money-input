@@ -1,7 +1,7 @@
-import { RaboFormCustomEvent } from '@src/components';
-import { FormSchema, InputTypes } from '@src/constants/form';
-import { validateMoney, validateRequired } from '@src/utils/form';
 import { Component, Host, h } from '@stencil/core';
+import { RaboFormCustomEvent } from '@src/components';
+import { FormSchema, InputTypes } from '@constants/form';
+import { validateMoney, validateRequired } from '@utils/validators';
 
 @Component({
   tag: 'rabo-layout',
@@ -40,6 +40,20 @@ export class RaboLayout {
       type: InputTypes.MONEY,
       name: 'amount',
       required: true,
+      disabled: true,
+      validators: [
+        { fn: validateRequired<number>, message: 'Amount is required.' },
+        { fn: validateMoney, message: 'Please enter a valid amount.' },
+      ],
+    },
+  ];
+
+  private value4 = { amount: 431.72 };
+  private schema4: FormSchema = [
+    {
+      type: InputTypes.MONEY,
+      name: 'amount',
+      required: true,
       disabled: false,
       validators: [
         { fn: validateRequired<number>, message: 'Amount is required.' },
@@ -49,8 +63,8 @@ export class RaboLayout {
     },
   ];
 
-  private value4 = { amount: 431.72, amount2: 431.72, amount3: 431.72 };
-  private schema4: FormSchema = [
+  private value5 = { amount: 431.72, amount2: 431.72, amount3: 431.72 };
+  private schema5: FormSchema = [
     {
       type: InputTypes.MONEY,
       name: 'amount',
@@ -129,11 +143,20 @@ export class RaboLayout {
                 ></rabo-form>
               </rabo-card>
 
-              <rabo-card heading="With Hint">
+              <rabo-card heading="With disabled">
                 <rabo-form
                   slot="content"
                   schema={this.schema3}
                   value={this.value3}
+                  onFormSubmit={(event) => this.handleSubmit(event, 'With disabled')}
+                ></rabo-form>
+              </rabo-card>
+
+              <rabo-card heading="With Hint">
+                <rabo-form
+                  slot="content"
+                  schema={this.schema4}
+                  value={this.value4}
                   onFormSubmit={(event) => this.handleSubmit(event, 'With Hint')}
                 ></rabo-form>
               </rabo-card>
@@ -141,8 +164,8 @@ export class RaboLayout {
               <rabo-card heading="With multiple fields">
                 <rabo-form
                   slot="content"
-                  schema={this.schema4}
-                  value={this.value4}
+                  schema={this.schema5}
+                  value={this.value5}
                   onFormSubmit={(event) => this.handleSubmit(event, 'With multiple fields')}
                 ></rabo-form>
               </rabo-card>

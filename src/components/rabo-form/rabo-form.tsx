@@ -64,7 +64,8 @@ export class RaboForm {
                 error={this.errors?.[field.name]}
                 onValueChange={(event) => this.handleChange(event, field.name)}
                 hint={field.hint}
-                required
+                required={field.required}
+                disabled={field.disabled}
               />
             );
           }

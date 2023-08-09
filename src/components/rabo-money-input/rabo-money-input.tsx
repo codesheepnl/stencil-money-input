@@ -1,6 +1,10 @@
 import { Component, Event, EventEmitter, Prop, State, h } from '@stencil/core';
 import { Currency, Separator } from '@constants/currency';
-import { getCurrencyDisplayByCode, getIntegerAndFractionalPartsFromNumber } from '@utils/form';
+import { getCurrencyDisplayByCode } from '@utils/form';
+import {
+  calculateFloatFromIntegerAndFractionalStrings,
+  getIntegerAndFractionalPartsFromNumber,
+} from '@utils/numbers';
 
 @Component({
   tag: 'rabo-money-input',
@@ -35,18 +39,6 @@ export class RaboMoneyInput {
     if (this.value) {
       [this.integer, this.fractional] = getIntegerAndFractionalPartsFromNumber(this.value);
     }
-  }
-
-  /**
-   * Calculates the complete floating point value based on the integer and fractional.
-   *
-   * @returns number
-   */
-  private get computedValue(): number {
-    const float = parseFloat(`${this.integer}.${this.fractional}`);
-    return !isNaN(float) && float !== undefined && float !== null
-      ? Math.round(float * 100) / 100
-      : null;
   }
 
   /**
@@ -85,7 +77,9 @@ export class RaboMoneyInput {
       this.fractional = '';
     }
 
-    this.valueChange.emit(this.computedValue);
+    this.valueChange.emit(
+      calculateFloatFromIntegerAndFractionalStrings(this.integer, this.fractional)
+    );
   }
 
   render() {
@@ -96,7 +90,11 @@ export class RaboMoneyInput {
         <label id={`${this.name}-label`} class="label">
           {this.label}
         </label>
-        <div class={`input ${this.error && 'input--is-invalid'}`}>
+        <div
+          class={`input ${this.error && 'input--is-invalid'} ${
+            this.disabled && 'input--is-disabled'
+          }`}
+        >
           <span class="input__currency" innerHTML={currencyCode} />
           <input
             class="input__integer"
