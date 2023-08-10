@@ -2,7 +2,6 @@
 
 <!-- Auto Generated Below -->
 
-
 ## Properties
 
 | Property              | Attribute | Description | Type                                                                                                                     | Default     |
@@ -10,19 +9,17 @@
 | `schema` _(required)_ | --        |             | `{ type: InputTypes; name: string; required?: boolean; disabled?: boolean; validators?: Validator[]; hint?: string; }[]` | `undefined` |
 | `value` _(required)_  | --        |             | `{ [x: string]: any; }`                                                                                                  | `undefined` |
 
-
 ## Events
 
 | Event        | Description | Type                                 |
 | ------------ | ----------- | ------------------------------------ |
 | `formSubmit` |             | `CustomEvent<{ [x: string]: any; }>` |
 
-
 ## Dependencies
 
 ### Used by
 
- - [rabo-layout](../rabo-layout)
+- [rabo-layout](../rabo-layout)
 
 ### Depends on
 
@@ -30,6 +27,7 @@
 - [rabo-button](../rabo-button)
 
 ### Graph
+
 ```mermaid
 graph TD;
   rabo-form --> rabo-money-input
@@ -38,6 +36,6 @@ graph TD;
   style rabo-form fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-----------------------------------------------
+---
 
-*Built with [StencilJS](https://stenciljs.com/)*
+_Built with [StencilJS](https://stenciljs.com/)_

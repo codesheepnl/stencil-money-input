@@ -2,7 +2,6 @@
 
 <!-- Auto Generated Below -->
 
-
 ## Dependencies
 
 ### Depends on
@@ -12,6 +11,7 @@
 - [rabo-form](../rabo-form)
 
 ### Graph
+
 ```mermaid
 graph TD;
   rabo-layout --> rabo-header
@@ -22,6 +22,6 @@ graph TD;
   style rabo-layout fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-----------------------------------------------
+---
 
-*Built with [StencilJS](https://stenciljs.com/)*
+_Built with [StencilJS](https://stenciljs.com/)_

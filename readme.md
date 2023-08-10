@@ -82,10 +82,10 @@ These components do not contribute to the functionalities for the demo, they are
 
 ## Other details
 
-I opted to use the `@stencil/sass` package to make life with CSS easier, and added the Roboto font. I also added ESLint and Prettier to this project to make the life of developers easier. They can both be run via package scripts. Furthermore, I made use of TSconfig paths to make imports easier and prettier.
+I opted to use the `@stencil/sass` package to make life with CSS easier, made use of CSS variables, and added the Roboto font. I also added ESLint and Prettier to this project to make the life of developers easier. They can both be run via package scripts. Furthermore, I made use of TSconfig paths to make imports easier and prettier.
 
 I didn't have the time left to make more tests like I wanted to. However, I did test the most important things on the money input field. If I had more time left, I would have tested the integration of the form and field together with a schema passed from above (e.g. layout component in this example). Also there is one console error from puppeteer in the tests which I didn't have time to fully check. It doesn't fail the test, so just ignore that for the demo.
 
-I also checked the page for accessibility and it passes the test from Axe-Devtools. Specificially I paid some attention to the money input here, for example the label that is put on top is referred to by the two inputs via an `aria-laballedby` attribute. Otherwise, we'd need two labels or do some trickery like hiding them from view.
+I also checked the page for accessibility and it passes the test from Axe-Devtools. Specificially I paid some attention to the money input here, for example the label that is put on top is referred to by the two inputs via an `aria-labelledby` attribute. Otherwise, we'd need two labels or do some trickery like hiding them from view.
 
 The project is not perfect by any means. But I think it showcases my potential, skills and coding style pretty well.
