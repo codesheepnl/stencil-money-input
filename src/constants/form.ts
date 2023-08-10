@@ -19,6 +19,6 @@ export type FormSchema = {
   name: string;
   required?: boolean;
   disabled?: boolean;
-  validators: Validator[];
+  validators?: Validator[];
   hint?: string;
 }[];

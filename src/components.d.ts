@@ -107,8 +107,8 @@ declare namespace LocalJSX {
     }
     interface RaboForm {
         "onFormSubmit"?: (event: RaboFormCustomEvent<typeof this.value>) => void;
-        "schema"?: FormSchema;
-        "value"?: Record<string, any>;
+        "schema": FormSchema;
+        "value": Record<string, any>;
     }
     interface RaboHeader {
     }

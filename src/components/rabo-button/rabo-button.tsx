@@ -17,8 +17,8 @@ export class RaboButton {
   render() {
     return (
       <button
-        class={`button button--${this.theme} ${this.fullWidth && 'button--full'} ${
-          this.disabled && 'button--is-disabled'
+        class={`button button--${this.theme} ${this.fullWidth ? 'button--full' : ''} ${
+          this.disabled ? 'button--is-disabled' : ''
         }`}
         disabled={this.disabled}
         type={this.type}

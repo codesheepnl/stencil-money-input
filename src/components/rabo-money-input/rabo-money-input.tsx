@@ -73,8 +73,8 @@ export class RaboMoneyInput {
       } else if (this.fractional?.length === 1) {
         this.fractional += '0';
       }
-    } else {
-      this.fractional = '';
+    } else if (this.fractional) {
+      this.integer = '0';
     }
 
     this.valueChange.emit(
@@ -91,8 +91,8 @@ export class RaboMoneyInput {
           {this.label}
         </label>
         <div
-          class={`input ${this.error && 'input--is-invalid'} ${
-            this.disabled && 'input--is-disabled'
+          class={`input ${this.error ? 'input--is-invalid' : ''} ${
+            this.disabled ? 'input--is-disabled' : ''
           }`}
         >
           <span class="input__currency" innerHTML={currencyCode} />

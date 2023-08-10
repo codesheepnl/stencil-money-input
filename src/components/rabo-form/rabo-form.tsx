@@ -9,8 +9,8 @@ import { Currency, Separator } from '@constants/currency';
   shadow: true,
 })
 export class RaboForm {
-  @Prop() schema: FormSchema;
-  @Prop({ mutable: true }) value: Record<string, any>;
+  @Prop() schema!: FormSchema;
+  @Prop({ mutable: true }) value!: Record<string, any>;
 
   @Event() formSubmit: EventEmitter<typeof this.value>;
 

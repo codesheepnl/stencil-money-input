@@ -21,7 +21,7 @@ export function getIntegerAndFractionalPartsFromNumber(value: number): string[] 
 /**
  * Takes integer and fractional as strings and converts them to a floating point number.
  * If empty or invalid, will return NaN or null respectively.
- * 
+ *
  * @param integer: string
  * @param fractional: string
  * @returns: number
@@ -36,12 +36,12 @@ export function calculateFloatFromIntegerAndFractionalStrings(
 
   const numberRegex = /^\d+$/;
 
-  if (!numberRegex.test(this.integer) || !numberRegex.test(this.fractional)) {
+  if (!numberRegex.test(integer) || !numberRegex.test(fractional)) {
     return NaN;
   }
 
-  const integerInt = parseInt(this.integer);
-  const fractionalInt = parseInt(this.fractional);
+  const integerInt = parseInt(integer);
+  const fractionalInt = parseInt(fractional);
 
   if (
     Number.isNaN(integerInt) ||
