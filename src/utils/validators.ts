@@ -15,7 +15,8 @@ export function validateRequired<T>(value: T): boolean {
  * @returns: boolean
  */
 export function validateMoney(value: number): boolean {
-  if (!value) return false;
+  if (value === 0) return true;
+  if (value === undefined || value === null) return false;
 
   return new RegExp(/^\d+\.?\d{0,2}$/).test(value.toString());
 }
