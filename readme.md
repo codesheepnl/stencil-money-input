@@ -1,75 +1,91 @@
-[![Built With Stencil](https://img.shields.io/badge/-Built%20With%20Stencil-16161d.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI%2BCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI%2BCgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU%2BCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00MjQuNywzNzMuOWMwLDM3LjYtNTUuMSw2OC42LTkyLjcsNjguNkgxODAuNGMtMzcuOSwwLTkyLjctMzAuNy05Mi43LTY4LjZ2LTMuNmgzMzYuOVYzNzMuOXoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTQyNC43LDI5Mi4xSDE4MC40Yy0zNy42LDAtOTIuNy0zMS05Mi43LTY4LjZ2LTMuNkgzMzJjMzcuNiwwLDkyLjcsMzEsOTIuNyw2OC42VjI5Mi4xeiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDI0LjcsMTQxLjdIODcuN3YtMy42YzAtMzcuNiw1NC44LTY4LjYsOTIuNy02OC42SDMzMmMzNy45LDAsOTIuNywzMC43LDkyLjcsNjguNlYxNDEuN3oiLz4KPC9zdmc%2BCg%3D%3D&colorA=16161d&style=flat-square)](https://stenciljs.com)
+# Stencil Money Input
 
-# Stencil Component Starter
+This is a demo project built with [StencilJS](https://stenciljs.com/) to showcase a money/currency input. The component consists of two inputs that together emit a float value to the form above.
 
-This is a starter project for building a standalone Web Component using Stencil.
+## Time log
 
-Stencil is also great for building entire apps. For that, use the [stencil-app-starter](https://github.com/ionic-team/stencil-app-starter) instead.
+| Date         | Time spent |
+| ------------ | ---------- |
+| Aug 4, 2023  | 30 min     |
+| Aug 7, 2023  | 2 hr       |
+| Aug 8, 2023  | 2 hr       |
+| Aug 9, 2023  | 2 hr       |
+| Aug 10, 2023 | 2 hr       |
 
-# Stencil
+## Setting up
 
-Stencil is a compiler for building fast web apps using Web Components.
-
-Stencil combines the best concepts of the most popular frontend frameworks into a compile-time rather than run-time tool.  Stencil takes TypeScript, JSX, a tiny virtual DOM layer, efficient one-way data binding, an asynchronous rendering pipeline (similar to React Fiber), and lazy-loading out of the box, and generates 100% standards-based Web Components that run in any browser supporting the Custom Elements v1 spec.
-
-Stencil components are just Web Components, so they work in any major framework or with no framework at all.
-
-## Getting Started
-
-To start building a new web component using Stencil, clone this repo to a new directory:
+If you're using [NVM](https://formulae.brew.sh/formula/nvm), execute the following to activate the node version in `.nvmrc`;
 
 ```bash
-git clone https://github.com/ionic-team/stencil-component-starter.git my-component
-cd my-component
-git remote rm origin
+$ nvm use
 ```
 
-and run:
+To start, install;
 
 ```bash
-npm install
-npm start
+$ yarn install
+
+# or, with NPM
+
+$ npm install
 ```
 
-To build the component for production, run:
+Commands:
 
 ```bash
-npm run build
+$ yarn start # Start the project
+
+$ yarn test # Test
+
+$ yarn test.watch # Test, but watch for changes
+
+$ yarn build # Compile the component library
+
+$ yarn generate # Generate boilerplates with stencil CLI
+
+$ yarn lint # Lint the project code with ESLint
+
+$ yarn lint:fix # Lint, but with autofix
+
+$ yarn format # Format the project code with Prettier
+
+$ yarn format:fix # Format, but with autofix
 ```
 
-To run the unit tests for the components, run:
+## Component / Architecture explanation
 
-```bash
-npm test
-```
+The demo is made using no other libraries or packages. I made a little form builder/schema which can be used to easily create the forms. I am using it in the [layout component](./src/components/rabo-layout/rabo-layout.tsx). The layout component is only used to showcase the `rabo-form` and `rabo-money-input` components.
 
-Need help? Check out our docs [here](https://stenciljs.com/docs/my-first-component).
+The [form component](./src/components/rabo-form/rabo-form.tsx) takes a schema and a value. It will then render the inputs based on whatever configuration was passed in the schema. It will also take validators - to customize the validation process - and some attributes like `required` and `disabled` to further configure the inputs.
 
+### Money input
 
-## Naming Components
+The money input is the actual component on demo here. I configured it as such, that everything is customizable and ready to be used in actual forms. Aria attributes are thought of too. I chose to split the incoming value into an `integer` and a `fractional`. These are put together into a single floating point value whenever `onChange` event fires on one of the inputs. This is then passed up the chain with the `valueChange` event, where the `form` can pick it up and update it's value.
 
-When creating new component tags, we recommend _not_ using `stencil` in the component name (ex: `<stencil-datepicker>`). This is because the generated component has little to nothing to do with Stencil; it's just a web component!
+I chose to abstract whatever complex logic and calculation away into `utils`. Furthermore, the field is also customizable with different currencies, configured via the components inputs.
 
-Instead, use a prefix that fits your company or any name for a group of related components. For example, all of the Ionic generated web components use the prefix `ion`.
+Lastly, I opted not to do validation directly on the money input, but instead use the schema-like approach, where the field can be configured with a as few or many validation functions as you like.
 
+### Form
 
-## Using this component
+The form takes the schema and renders the money input field. Whenever the form receives a `valueChange` event from the money input, it will update it's value. If the `submit` button is clicked, the form will fire an event `formSubmit` and pass the submitted value up.
 
-There are three strategies we recommend for using web components built with Stencil.
+Also, it will check each field for validations that were configured on the schema. If any of them fail, it will keep track of errors in a Map and pass it to the corresponding field to show the error.
 
-The first step for all three of these strategies is to [publish to NPM](https://docs.npmjs.com/getting-started/publishing-npm-packages).
+### Layout
 
-### Script tag
+The layout serves as a showcase for the project, showing a few forms with different variations. It also shows how to utilize the schema concept I built.
 
-- Put a script tag similar to this `<script type='module' src='https://unpkg.com/my-component@0.0.1/dist/my-component.esm.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
+### Button, Card, Header
 
-### Node Modules
-- Run `npm install my-component --save`
-- Put a script tag similar to this `<script type='module' src='node_modules/my-component/dist/my-component.esm.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
+These components do not contribute to the functionalities for the demo, they are just here to provide some look and feel. I did however try to make them customizable, for example the button can be configured to some extent.
 
-### In a stencil-starter app
-- Run `npm install my-component --save`
-- Add an import to the npm packages `import my-component;`
-- Then you can use the element anywhere in your template, JSX, html etc
+## Other details
+
+I opted to use the `@stencil/sass` package to make life with CSS easier, and added the Roboto font. I also added ESLint and Prettier to this project to make the life of developers easier. They can both be run via package scripts. Furthermore, I made use of TSconfig paths to make imports easier and prettier.
+
+I didn't have the time left to make more tests like I wanted to. However, I did test the most important things on the money input field. If I had more time left, I would have tested the integration of the form and field together with a schema passed from above (e.g. layout component in this example). Also there is one console error from puppeteer in the tests which I didn't have time to fully check. It doesn't fail the test, so just ignore that for the demo.
+
+I also checked the page for accessibility and it passes the test from Axe-Devtools. Specificially I paid some attention to the money input here, for example the label that is put on top is referred to by the two inputs via an `aria-laballedby` attribute. Otherwise, we'd need two labels or do some trickery like hiding them from view.
+
+The project is not perfect by any means. But I think it showcases my potential, skills and coding style pretty well.
